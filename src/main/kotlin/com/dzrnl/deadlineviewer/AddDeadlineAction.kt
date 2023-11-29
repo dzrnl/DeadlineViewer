@@ -3,8 +3,8 @@ package com.dzrnl.deadlineviewer
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 
-class AddDeadlinesAction : AnAction() {
+class AddDeadlineAction : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
-        DeadlineDataDialogWrapper().showAndGet()
+        AddDeadlineDialogWrapper().showAndGet()
     }
 }

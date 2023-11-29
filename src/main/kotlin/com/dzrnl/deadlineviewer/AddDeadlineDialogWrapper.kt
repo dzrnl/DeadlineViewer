@@ -9,7 +9,7 @@ import javax.swing.JComponent
 import javax.swing.JPanel
 import javax.swing.JTextField
 
-class DeadlineDataDialogWrapper : DialogWrapper(true) {
+class AddDeadlineDialogWrapper : DialogWrapper(true) {
     private val panel = JPanel(MigLayout())
     private val nameField = JTextField("My Deadline") //
     private val datePicker = DatePicker()
@@ -38,6 +38,6 @@ class DeadlineDataDialogWrapper : DialogWrapper(true) {
         super.doOKAction()
 
         val state = Settings.getInstance().state
-        state?.deadlines?.add(Deadline(nameField.text, descriptionArea.text))
+        state?.deadlines?.add(Deadline(nameField.text, datePicker.date.toString(), descriptionArea.text))
     }
 }

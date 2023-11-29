@@ -1,4 +1,7 @@
 package com.dzrnl.deadlineviewer
 
-class Deadline {
-}
+data class Deadline(
+    val name: String,
+    val date: String,
+    val description: String
+)
