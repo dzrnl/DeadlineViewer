@@ -1,6 +1,8 @@
 package com.dzrnl.deadlineviewer
 
 import com.intellij.openapi.ui.DialogWrapper
+import com.intellij.openapi.wm.StatusBarWidget
+import com.intellij.openapi.wm.StatusBarWidgetFactory
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBTextArea
 import com.intellij.ui.components.JBTextField
@@ -10,6 +12,7 @@ import java.text.SimpleDateFormat
 import javax.swing.JComponent
 import javax.swing.JPanel
 import java.util.Date
+import javax.swing.JButton
 
 class SetDeadlineDialogWrapper : DialogWrapper(true) {
     private val panel = JPanel(MigLayout())
@@ -17,6 +20,7 @@ class SetDeadlineDialogWrapper : DialogWrapper(true) {
     private val dateFormatter = SimpleDateFormat("dd-MM-yyyy")
     private val datePicker = DatePicker(Date(), dateFormatter)
     private val descriptionArea = JBTextArea()
+    private val removeButton = JButton("Remove deadline")
 
     init {
         init()
@@ -24,6 +28,15 @@ class SetDeadlineDialogWrapper : DialogWrapper(true) {
 
         descriptionArea.lineWrap = true
         descriptionArea.wrapStyleWord = true
+        removeButton.addActionListener {
+            val state = Settings.getInstance().state
+            state?.deadlineName = ""
+            state?.deadlineDate = "no deadline"
+            state?.deadlineDescription = ""
+            state?.deadlineExists = false
+
+            doCancelAction()
+        }
     }
 
     override fun createCenterPanel(): JComponent {
@@ -33,6 +46,7 @@ class SetDeadlineDialogWrapper : DialogWrapper(true) {
         panel.add(datePicker, "wrap, pushx, growx")
         panel.add(JBLabel("Description:"))
         panel.add(descriptionArea, "wrap, pushx, growx")
+        panel.add(removeButton, "wrap, pushx, growx")
 
         val state = Settings.getInstance().state
         if (state?.deadlineExists == true) {
