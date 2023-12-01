@@ -21,15 +21,12 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.dzrnl.deadlineviewer.Settings"/>
+
+        <statusBarWidgetFactory id="DeadlineViewer"
+                                implementation="com.dzrnl.deadlineviewer.DeadlineStatusWidgetFactory"
+                                order="before LineSeparator"/>
     </extensions>
 
     <actions>
-        <group id="DeadlineViewer" text="Deadlines">
-            <add-to-group group-id="MainMenu" anchor="before" relative-to-action="HelpMenu"/>
-            <action id="com.dzrnl.deadlineviewer.AddDeadlineAction" class="com.dzrnl.deadlineviewer.AddDeadlineAction"
-                    text="Add Deadline" description="Add deadline to the list of deadlines"/>
-            <action id="com.dzrnl.deadlineviewer.ShowDeadlinesAction" class="com.dzrnl.deadlineviewer.ShowDeadlinesAction"
-                    text="Show Deadlines" description="Show all current deadlines"/>
-        </group>
     </actions>
 </idea-plugin>
